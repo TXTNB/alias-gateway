@@ -1,0 +1,6 @@
+config.json
+gateway.log
+*.log
+__pycache__/
+*.py[cod]
+.e2e/*.local.json

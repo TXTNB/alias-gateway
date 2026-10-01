@@ -1,0 +1,38 @@
+{
+  "listen_port": 8789,
+  "listen_host": "127.0.0.1",
+  "panel_password_hash": "pbkdf2_sha256$200000$f3c7dc6fc2b2b6c03b64f0e78f776f36$69a867bf770c9df42b465af0ccbbfa9414dea0c3a35e90bb37b9ab8310fc1934",
+  "routes": [
+    {
+      "client_key": "sk-local-test-0001",
+      "upstreams": [
+        {
+          "name": "fake",
+          "base_url": "http://127.0.0.1:9911/v1",
+          "auth": {
+            "type": "none",
+            "key": ""
+          },
+          "extra_headers": {},
+          "timeout": 30
+        },
+        {
+          "name": "backup",
+          "base_url": "http://127.0.0.1:9912/v1",
+          "auth": {
+            "type": "none",
+            "key": ""
+          },
+          "extra_headers": {},
+          "timeout": 30
+        }
+      ],
+      "aliases": {
+        "deepseek-flash": "deepseek-v4.1-flash"
+      },
+      "prefer": {},
+      "whitelist": [],
+      "blacklist": []
+    }
+  ]
+}
