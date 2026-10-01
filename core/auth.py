@@ -117,7 +117,7 @@ class SessionStore:
         return token
 
     def validate(self, token):
-        """token 是否有效；顺手清掉这条已过期的记录。"""
+        """token 是否有效；顺带清掉这条已过期的记录。"""
         if not token:
             return False
         now = time.time()

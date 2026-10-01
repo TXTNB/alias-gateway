@@ -9,12 +9,12 @@
     store.masked()                      给管理端读的打码副本
     store.register_password(new)        首次注册（设置管理密码）
 
-首次生成的 ``config.json`` 是一份**空骨架**：只有监听地址和一个空密码哈希，
-``routes`` 为空数组。这里不预填任何上游 —— 以前会塞一个
+首次生成的 ``config.json`` 是一份空骨架：只有监听地址和一个空密码哈希，
+``routes`` 为空数组。这里不预填任何上游。以前会塞一个
 ``https://example.invalid/v1`` 的占位条目，看起来像"已经配好的 API 数据"，
-其实是连不上的假地址，容易让人以为网关里凭空多出东西。
+实际是连不上的假地址，容易让人以为网关里凭空多出东西。
 
-``routes`` 为空是**合法状态**：服务照常起来，只是还没有可用的客户端 Key，
+``routes`` 为空是合法状态：服务照常起来，只是还没有可用的客户端 Key，
 等用户在管理界面里加。
 """
 
@@ -50,7 +50,7 @@ def generate_client_key():
 def mask_secret(value, keep=MASK_KEEP):
     """给上游 Key 打码：保留前 ``keep`` 位，后面统一用 ``MASK`` 代替。
 
-    太短的值（不长于 ``keep``）直接整个打码，免得露出大部分内容。
+    太短的值（不长于 ``keep``）直接整个打码，避免露出大部分内容。
     """
     if value is None:
         return ""
@@ -65,7 +65,7 @@ def mask_secret(value, keep=MASK_KEEP):
 def default_config():
     """首次生成用的空骨架。
 
-    这里**不预填任何上游**，上游全部由用户自己在管理界面里加。
+    这里不预填任何上游，上游全部由用户自己在管理界面里加。
     """
     return {
         "listen_port": DEFAULT_PORT,
@@ -434,7 +434,7 @@ class ConfigStore:
     def masked(self):
         """给管理端读的副本。
 
-        客户端 Key **不打码**（它本来就是要复制到客户端里用的）；只有上游的
+        客户端 Key 不打码（它本来就是要复制到客户端里用的）；只有上游的
         ``auth.key`` 属于第三方凭据，才打码。密码哈希永远不出现在副本里。
         """
         with self._lock:

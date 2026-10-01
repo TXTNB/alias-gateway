@@ -81,8 +81,8 @@ def preheat(store, logger):
 
     返回 ``(ok, model_map)``。有冲突时 ok=False，报告已经打印到 stderr。
 
-    上游全挂不算失败 —— 这时候没有清单可比，直接放行，让服务起来，
-    总比因为上游临时不可用就拒绝启动要好。
+    上游全挂不算失败：这时候没有清单可比，直接放行让服务起来，
+    比因为上游临时不可用就拒绝启动要好。
     """
     routes = store.routes()
     if not routes:

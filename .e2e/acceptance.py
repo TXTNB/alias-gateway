@@ -84,7 +84,7 @@ def http(method, path, body=None, headers=None, timeout=30, raw=False):
 
 
 def _maybe_json(payload):
-    """能解析成 JSON 就解析，否则退回文本，免得一处非 JSON 响应炸掉整轮验收。"""
+    """能解析成 JSON 就解析，否则退回文本，避免一处非 JSON 响应炸掉整轮验收。"""
     try:
         return json.loads(payload.decode("utf-8"))
     except Exception:
